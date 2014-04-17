@@ -57,8 +57,8 @@ module MarketBot
         result[:price] = node[:content].strip rescue 'Free'
 
         result[:category] = doc.css('.category').first.text.strip rescue ''
-        result[:description] = doc.xpath("//div[@itemprop='description']").first.inner_html.strip
-        result[:title] = doc.xpath("//div[@itemprop='name']").first.text.strip
+        result[:description] = doc.xpath("//div[@itemprop='description']").first.inner_html.strip rescue ''
+        result[:title] = doc.xpath("//div[@itemprop='name']").first.text.strip rescue ''
 
         score = doc.css('.score-container').first
         unless score.nil?
@@ -69,7 +69,7 @@ module MarketBot
         end
 
         node = doc.xpath("//div[@itemprop='author']")
-        result[:developer] = node.css('.primary').first.text.strip
+        result[:developer] = node.css('.primary').first.text.strip rescue ''
 
         result[:more_from_developer] = []
         result[:users_also_installed] = []
